@@ -87,7 +87,7 @@ int CALLBACK WinMain(HINSTANCE these, HINSTANCE dont, LPSTR work, int anyway) {
 	// skipping translator table. No resources == smaller exe.
 
 	MSG msg;
-	while (GetMessage(&msg, nullptr, 0, 0)){
+	while (GetMessage(&msg, NULL, 0, 0)){
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
