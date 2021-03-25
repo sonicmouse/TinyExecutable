@@ -1,5 +1,4 @@
 //
-// sonicmouse@gmail.com
 // Taking on Dave's Garage for smallest functional EXE which displays a window.
 // Dave resorted to using UPX to get at 3.5 KB. I can get to 1,776 bytes without any packers... and using C!
 // This was written in Visual Studio 2019 Enterprise.
