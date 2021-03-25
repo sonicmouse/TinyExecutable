@@ -9,7 +9,7 @@
 #pragma comment(linker, "/NODEFAULTLIB")
 #pragma comment(linker, "/INCREMENTAL:NO")
 #pragma comment(linker, "/MERGE:.rdata=.text")
-#pragma comment(linker, "/ENTRY:WinMain")
+#pragma comment(linker, "/ENTRY:NakedMain")
 #pragma comment(linker, "/ALIGN:16")
 #endif
 
@@ -49,10 +49,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 /// <summary>
-/// This is a shell.. a ruse. None of these parameters are valid. Since we cut out the CRT, there
-/// is no stub to initialize these vales properly, so they are all unused.
+/// We cut out the CRT, so there is no initialization stub. As a matter of fact, this is the stub.
+/// We are just going to run from here.
 /// </summary>
-int CALLBACK WinMain(HINSTANCE these, HINSTANCE dont, LPSTR work, int anyway) {
+int WINAPI NakedMain() {
 
 	const HINSTANCE hInstance = GetModuleHandle(NULL);
 
@@ -79,8 +79,7 @@ int CALLBACK WinMain(HINSTANCE these, HINSTANCE dont, LPSTR work, int anyway) {
 		return -1;
 	}
 
-	// Dave doesn't care about nCmdShow, neither do I.
-	// How would you even get that without the WinMain param?
+	// we are not going to worry about nCmdShow and just show the default.
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 	UpdateWindow(hWnd);
 
