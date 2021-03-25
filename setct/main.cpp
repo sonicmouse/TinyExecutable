@@ -35,7 +35,7 @@ int WINAPI NakedMain() {
 	wcex.lpfnWndProc = WndProc;
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
-	wcex.hInstance = GetModuleHandle(NULL);
+	wcex.hInstance = hInstance;
 	wcex.hIcon = NULL;
 	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_3DSHADOW + 1);
@@ -70,26 +70,26 @@ int WINAPI NakedMain() {
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message) {
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	case WM_PAINT:
-	{
-		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hWnd, &ps);
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			break;
+		case WM_PAINT:
+			{
+				PAINTSTRUCT ps;
+				HDC hdc = BeginPaint(hWnd, &ps);
 
-		SetBkMode(hdc, TRANSPARENT);
+				SetBkMode(hdc, TRANSPARENT);
 
-		RECT rc{};
-		GetClientRect(hWnd, &rc);
+				RECT rc{};
+				GetClientRect(hWnd, &rc);
 
-		DrawText(hdc, DISPLAY_TEXT, -1, &rc, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+				DrawText(hdc, DISPLAY_TEXT, -1, &rc, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 
-		EndPaint(hWnd, &ps);
-	}
-	break;
-	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
+				EndPaint(hWnd, &ps);
+			}
+			break;
+		default:
+			return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 
 	return 0;
