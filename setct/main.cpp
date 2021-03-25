@@ -19,33 +19,7 @@
 #define WINDOW_TITLE "Tiny EXE"
 #define DISPLAY_TEXT "THIS IS A REALLY, REALLY SMALL EXECUTABLE. 1,776 BYTES, ACTUALLY!"
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	switch (message) {
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			break;
-		case WM_PAINT:
-			{
-				PAINTSTRUCT ps;
-				HDC hdc = BeginPaint(hWnd, &ps);
-
-				SetBkMode(hdc, TRANSPARENT);
-
-				RECT rc{};
-				GetClientRect(hWnd, &rc);
-
-				DrawText(hdc, DISPLAY_TEXT, -1, &rc, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
-
-				EndPaint(hWnd, &ps);
-			}
-			break;
-		default:
-			return DefWindowProc(hWnd, message, wParam, lParam);
-	}
-
-	return 0;
-}
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 /// <summary>
 /// We cut out the CRT, so there is no initialization stub. As a matter of fact, this is the stub.
@@ -91,4 +65,32 @@ int WINAPI NakedMain() {
 	}
 
 	return (int)msg.wParam;
+}
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message) {
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(hWnd, &ps);
+
+		SetBkMode(hdc, TRANSPARENT);
+
+		RECT rc{};
+		GetClientRect(hWnd, &rc);
+
+		DrawText(hdc, DISPLAY_TEXT, -1, &rc, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+
+		EndPaint(hWnd, &ps);
+	}
+	break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+
+	return 0;
 }
