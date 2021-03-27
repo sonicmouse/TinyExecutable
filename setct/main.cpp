@@ -34,11 +34,11 @@ int WINAPI NakedMain() {
 	wcex.hInstance = hInstance;
 	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_3DSHADOW + 1);
-	wcex.lpszClassName = "ZTINYC";
+	wcex.lpszClassName = "SMOL";
 
 	RegisterClassEx(&wcex);
 
-	HWND hWnd = CreateWindow(wcex.lpszClassName, "SMOL", WS_OVERLAPPEDWINDOW,
+	HWND hWnd = CreateWindow(wcex.lpszClassName, wcex.lpszClassName, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
 
 	if (!hWnd) {
@@ -81,7 +81,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 
 				DrawText(
 					hdc,
-					"1,840 BYTES",
+					"1,824 BYTES",
 					-1,
 					&rc,
 					DT_SINGLELINE | DT_CENTER | DT_VCENTER);
