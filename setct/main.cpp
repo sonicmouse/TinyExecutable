@@ -110,4 +110,5 @@ void* __cdecl memset(void* _dst, int _val, size_t _size) {
 		pop edi
 		pop ecx
 	}
+	return _dst;
 }
